@@ -1,0 +1,13 @@
+{
+  "success": false,
+  "error": "Wrangler not authenticated. Run: npm run cf-login",
+  "duration": 561,
+  "steps": [
+    {
+      "name": "Pre-deployment validation",
+      "status": "failed",
+      "duration": 560,
+      "output": "Wrangler not authenticated. Run: npm run cf-login"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+# Cloudflare Workers configuration for Restaurant SaaS
+# Production-ready configuration for Next.js 15 with OpenNext adapter
+
+name = "restaurant-saas"
+main = ".open-next/worker.js"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Assets configuration for OpenNext
+[assets]
+dir = ".open-next/assets"
+
+# Environment variables
+[env.production.vars]
+NODE_ENV = "production"
+NEXT_RUNTIME = "edge"
+
+[env.staging.vars]
+NODE_ENV = "staging"
+NEXT_RUNTIME = "edge"
+
+# Pages configuration for static assets
+pages_build_output_dir = ".next"
+
+# Custom domains configuration (to be set up in Cloudflare dashboard)
+# routes = [
+#   { pattern = "restaurantsaas.com/*", zone_name = "restaurantsaas.com" },
+#   { pattern = "*.restaurantsaas.com/*", zone_name = "restaurantsaas.com" }
+# ]
+
+# Build configuration
+[build]
+command = "npm run pages:build"
+
+# Environment-specific routes
+[env.production]
+routes = [
+  { pattern = "restaurantsaas.com/*" },
+  { pattern = "*.restaurantsaas.com/*" }
+]
+
+[env.staging]
+routes = [
+  { pattern = "staging.restaurantsaas.com/*" },
+  { pattern = "*.staging.restaurantsaas.com/*" }
+]
+
+# Development environment
+[env.development]
+# Local development doesn't need routes
+
+# Analytics and monitoring
+[analytics_engine_datasets]
+
+# Durable Objects (for future features like real-time order updates)
+# [[durable_objects.bindings]]
+# name = "ORDER_TRACKER"
+# class_name = "OrderTracker"
+
+# KV namespaces for caching (optional)
+# [[kv_namespaces]]
+# binding = "CACHE_KV"
+# id = "your-kv-namespace-id"
+# preview_id = "your-preview-kv-namespace-id"
+
+# R2 buckets for file storage (optional)
+# [[r2_buckets]]
+# binding = "ASSETS_BUCKET"
+# bucket_name = "restaurant-saas-assets"
+
+# D1 database bindings (if using Cloudflare D1 instead of Supabase)
+# [[d1_databases]]
+# binding = "DATABASE"
+# database_name = "restaurant-saas-db"
+# database_id = "your-d1-database-id"
+
+# Queue bindings for background tasks (optional)
+# [[queues.producers]]
+# binding = "TASK_QUEUE"
+# queue = "restaurant-tasks"
+
+# [[queues.consumers]]
+# queue = "restaurant-tasks"
+# max_batch_size = 10
+# max_batch_timeout = 30
+
+# Cron triggers for background jobs
+# [[triggers.crons]]
+# cron = "0 */6 * * *"  # Every 6 hours
+# handler = "src/scheduled/cleanup.ts"
+
+# Rate limiting rules
+# [[rules]]
+# action = "block"
+# expression = "(cf.threat_score gt 14)"
+
+# Security headers
+[env.production.vars]
+# These will be merged with other environment variables
+CSP_HEADER = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.supabase.co https://api.stripe.com;"
+
+# Secrets (to be set using wrangler secret put)
+# wrangler secret put SUPABASE_SERVICE_ROLE_KEY --env production
+# wrangler secret put STRIPE_SECRET_KEY --env production  
+# wrangler secret put STRIPE_WEBHOOK_SECRET --env production
+# wrangler secret put NEXTAUTH_SECRET --env production
+# wrangler secret put JWT_SECRET --env production
+
+# Staging secrets
+# wrangler secret put SUPABASE_SERVICE_ROLE_KEY --env staging
+# wrangler secret put STRIPE_SECRET_KEY --env staging
+# wrangler secret put NEXTAUTH_SECRET --env staging
