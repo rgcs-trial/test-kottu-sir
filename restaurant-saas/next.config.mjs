@@ -1,3 +1,11 @@
+// Conditional import for bundle analyzer
+let BundleAnalyzerPlugin;
+try {
+  ({ BundleAnalyzerPlugin } = await import('webpack-bundle-analyzer'));
+} catch {
+  // Bundle analyzer not available
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Moved from experimental as per Next.js 15 requirements
@@ -29,12 +37,94 @@ const nextConfig = {
     ],
   },
   
+  // Performance optimizations
+  swcMinify: true,
+  modularizeImports: {
+    lodash: {
+      transform: 'lodash/{{member}}',
+    },
+    '@mui/material': {
+      transform: '@mui/material/{{member}}',
+    },
+    '@mui/icons-material': {
+      transform: '@mui/icons-material/{{member}}',
+    },
+  },
+  
+  // Experimental features for performance
+  experimental: {
+    optimizeCss: true,
+    gzipSize: true,
+    craCompat: true,
+    esmExternals: true,
+    appDir: true,
+    serverActions: true,
+    typedRoutes: true,
+  },
+  
+  // Bundle optimization
+  productionBrowserSourceMaps: false,
+  
   // Cloudflare Workers compatibility
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { dev, isServer, webpack }) => {
     // Handle WASM files for Cloudflare Workers
     config.experiments = {
       ...config.experiments,
       asyncWebAssembly: true,
+    }
+    
+    // Bundle analyzer in development
+    if (!dev && !isServer && process.env.ANALYZE === 'true' && BundleAnalyzerPlugin) {
+      config.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzerMode: 'static',
+          openAnalyzer: false,
+          reportFilename: './analyze/client.html'
+        })
+      );
+    }
+    
+    // Optimization for production
+    if (!dev) {
+      // Tree shaking improvements
+      config.optimization = {
+        ...config.optimization,
+        usedExports: true,
+        sideEffects: false,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              test: /[\/]node_modules[\/]/,
+              name: 'vendors',
+              chunks: 'all',
+              priority: 10,
+              reuseExistingChunk: true,
+              enforce: true
+            },
+            common: {
+              minChunks: 2,
+              chunks: 'all',
+              name: 'common',
+              priority: 5,
+              reuseExistingChunk: true,
+              enforce: true
+            },
+            styles: {
+              name: 'styles',
+              test: /\.(css|scss|sass)$/,
+              chunks: 'all',
+              enforce: true
+            }
+          }
+        }
+      };
+      
+      // Minimize bundle size
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@': require('path').resolve(__dirname),
+      };
     }
     
     // Optimize for edge runtime
@@ -115,8 +205,25 @@ const nextConfig = {
   // Enable Power Features
   poweredByHeader: false,
   
-  // Compression
+  // Compression and caching
   compress: true,
+  
+  // Performance budgets
+  onDemandEntries: {
+    maxInactiveAge: 25 * 1000,
+    pagesBufferLength: 2,
+  },
+  
+  // Reduce bundle size
+  generateEtags: true,
+  
+  // Optimize fonts
+  optimizeFonts: true,
+  
+  // Generate static files
+  generateBuildId: async () => {
+    return process.env.GIT_COMMIT_SHA || 'development'
+  },
 }
 
 export default nextConfig

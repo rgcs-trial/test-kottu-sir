@@ -1,9 +1,14 @@
 # Cloudflare Workers configuration for Restaurant SaaS
+# Production-ready configuration for Next.js 15 with OpenNext adapter
 
 name = "restaurant-saas"
-main = ".next/server/index.js"
-compatibility_date = "2024-01-15"
+main = ".open-next/worker.js"
+compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
+
+# Assets configuration for OpenNext
+[assets]
+dir = ".open-next/assets"
 
 # Environment variables
 [env.production.vars]

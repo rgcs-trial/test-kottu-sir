@@ -9,10 +9,66 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "type-check": "tsc --noEmit",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "preview": "npm run pages:build && wrangler pages dev",
-    "deploy": "npm run pages:build && wrangler pages deploy",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv env.d.ts"
+    "optimize-build": "tsx scripts/optimize-build.ts",
+    "analyze": "ANALYZE=true npm run build",
+    "bundle-analyzer": "npm run analyze && npx webpack-bundle-analyzer .next/static/webpack-stats.json",
+    "performance-test": "tsx scripts/performance-test.ts",
+    "cache-test": "tsx scripts/cache-test.ts",
+    
+    "build:cloudflare": "npm run lint && npm run type-check && next build && npx @opennextjs/cloudflare",
+    "build:production": "npm run build:cloudflare",
+    "build:staging": "npm run build:cloudflare",
+    "build:preview": "npm run build:cloudflare",
+    
+    "deploy:production": "npm run build:production && wrangler deploy --env production",
+    "deploy:staging": "npm run build:staging && wrangler deploy --env staging",
+    "deploy:preview": "npm run build:preview && wrangler deploy --env development",
+    
+    "preview:local": "npm run build:cloudflare && wrangler dev",
+    "preview:remote": "npm run build:cloudflare && wrangler dev --remote",
+    "preview:staging": "npm run build:staging && wrangler dev --env staging --remote",
+    
+    "validate:production": "tsx scripts/validate-deployment.ts --env production",
+    "validate:staging": "tsx scripts/validate-deployment.ts --env staging",
+    "validate:preview": "tsx scripts/validate-deployment.ts --env development",
+    
+    "setup:cloudflare": "tsx scripts/setup-cloudflare.ts",
+    "setup:secrets": "tsx scripts/setup-secrets.ts",
+    "setup:env": "tsx scripts/setup-environment.ts",
+    
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv env.d.ts",
+    "cf-login": "wrangler auth login",
+    "cf-whoami": "wrangler auth whoami",
+    "cf-logout": "wrangler auth logout",
+    
+    "kv:create": "tsx scripts/kv-setup.ts",
+    "r2:create": "tsx scripts/r2-setup.ts",
+    "do:create": "tsx scripts/durable-objects-setup.ts",
+    "queues:create": "tsx scripts/queues-setup.ts",
+    
+    "logs:production": "wrangler tail --env production",
+    "logs:staging": "wrangler tail --env staging",
+    "logs:development": "wrangler tail --env development",
+    
+    "analytics:production": "wrangler analytics --env production",
+    "analytics:staging": "wrangler analytics --env staging",
+    
+    "test:integration": "tsx scripts/test-integration.ts",
+    "test:deployment": "tsx scripts/test-deployment.ts",
+    "test:performance": "tsx scripts/test-performance.ts",
+    
+    "rollback:production": "tsx scripts/rollback.ts --env production",
+    "rollback:staging": "tsx scripts/rollback.ts --env staging",
+    
+    "health:check": "tsx scripts/health-check.ts",
+    "smoke:test": "tsx scripts/smoke-test.ts",
+    
+    "secrets:rotate": "tsx scripts/rotate-secrets.ts",
+    "maintenance:mode": "tsx scripts/maintenance-mode.ts",
+    
+    "deploy": "npm run deploy:production",
+    "pages:build": "npm run build:cloudflare",
+    "preview": "npm run preview:local"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
@@ -55,6 +111,7 @@
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.8.4",
     "@cloudflare/workers-types": "^4.20231218.0",
+    "@opennextjs/cloudflare": "^1.0.0-beta.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
@@ -66,9 +123,12 @@
     "eslint-config-next": "^15.0.0",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.6.2",
     "typescript": "^5.3.3",
     "vercel": "latest",
-    "wrangler": "^3.22.1"
+    "wrangler": "^3.22.1",
+    "webpack-bundle-analyzer": "^4.9.1",
+    "tsx": "^4.6.0"
   },
   "engines": {
     "node": ">=18.17.0"
