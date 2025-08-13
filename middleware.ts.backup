@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { createMiddlewareSupabaseClient } from '@/lib/auth/index'
-import type { TenantInfo, MiddlewareContext } from '@/types'
+import type { TenantInfo, MiddlewareContext } from '@/types/middleware'
 import createMiddleware from 'next-intl/middleware'
 import { locales, defaultLocale } from './i18n'
 

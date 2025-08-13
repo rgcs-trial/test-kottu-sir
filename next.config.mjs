@@ -55,7 +55,7 @@ const nextConfig = {
   
   // Experimental features for performance
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true, // Disabled temporarily for critters dependency issue
     gzipSize: true,
     craCompat: true,
     esmExternals: true,
