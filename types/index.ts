@@ -505,3 +505,301 @@ export interface MiddlewareContext {
   pathname: string
   searchParams: URLSearchParams
 }
+
+// ===== PROMOTION TYPES =====
+
+export const PromotionType = z.enum([
+  'percentage',
+  'fixed_amount',
+  'buy_x_get_y',
+  'free_delivery',
+  'happy_hour',
+  'first_time_customer',
+  'loyalty_reward',
+  'category_discount',
+  'bundle_deal'
+])
+export type PromotionType = z.infer<typeof PromotionType>
+
+export const PromotionStatus = z.enum([
+  'draft',
+  'active', 
+  'paused',
+  'expired',
+  'exhausted',
+  'cancelled'
+])
+export type PromotionStatus = z.infer<typeof PromotionStatus>
+
+export const DiscountScope = z.enum([
+  'order_total',
+  'subtotal',
+  'delivery_fee',
+  'category',
+  'item',
+  'first_item',
+  'cheapest_item'
+])
+export type DiscountScope = z.infer<typeof DiscountScope>
+
+export const CustomerSegment = z.enum([
+  'all_customers',
+  'new_customers',
+  'returning_customers',
+  'vip_customers',
+  'inactive_customers',
+  'birthday_customers',
+  'specific_customers'
+])
+export type CustomerSegment = z.infer<typeof CustomerSegment>
+
+export const UsageFrequency = z.enum([
+  'once_per_customer',
+  'daily',
+  'weekly',
+  'monthly',
+  'unlimited'
+])
+export type UsageFrequency = z.infer<typeof UsageFrequency>
+
+export const PromotionSchema = z.object({
+  id: z.string().uuid(),
+  tenantId: z.string().uuid(),
+  name: z.string().min(1),
+  description: z.string().optional(),
+  internalNotes: z.string().optional(),
+  
+  // Promotion configuration
+  promotionType: PromotionType,
+  status: PromotionStatus,
+  discountScope: DiscountScope,
+  
+  // Discount values
+  discountPercentage: z.number().min(0).max(100).optional(),
+  discountAmount: z.number().min(0).optional(),
+  maxDiscountAmount: z.number().min(0).optional(),
+  
+  // Buy X Get Y configuration
+  buyQuantity: z.number().min(1).optional(),
+  getQuantity: z.number().min(1).optional(),
+  getDiscountPercentage: z.number().min(0).max(100).optional(),
+  
+  // Requirements
+  minOrderAmount: z.number().min(0).default(0),
+  minItemsQuantity: z.number().min(0).default(0),
+  
+  // Usage limits
+  totalUsageLimit: z.number().min(1).optional(),
+  perCustomerLimit: z.number().min(1).optional(),
+  usageFrequency: UsageFrequency,
+  
+  // Time restrictions
+  validFrom: z.date().optional(),
+  validUntil: z.date().optional(),
+  validDays: z.array(DayOfWeek),
+  validHoursStart: z.string().optional(), // HH:MM format
+  validHoursEnd: z.string().optional(),   // HH:MM format
+  
+  // Targeting
+  targetSegment: CustomerSegment,
+  
+  // Stacking rules
+  canStackWithOthers: z.boolean().default(false),
+  stackPriority: z.number().min(0).max(100).default(0),
+  
+  // Application settings
+  autoApply: z.boolean().default(false),
+  requiresCode: z.boolean().default(true),
+  
+  // Display settings
+  isFeatured: z.boolean().default(false),
+  displayBanner: z.boolean().default(false),
+  bannerText: z.string().optional(),
+  bannerColor: z.string().optional(), // Hex color
+  
+  // Analytics
+  totalUses: z.number().default(0),
+  totalDiscountGiven: z.number().default(0),
+  totalRevenueImpact: z.number().default(0),
+  
+  // Audit
+  createdAt: z.date(),
+  updatedAt: z.date(),
+  createdBy: z.string().uuid(),
+  lastModifiedBy: z.string().uuid().optional(),
+})
+
+export type Promotion = z.infer<typeof PromotionSchema>
+
+export const PromotionCodeSchema = z.object({
+  id: z.string().uuid(),
+  promotionId: z.string().uuid(),
+  code: z.string().min(1).max(50),
+  description: z.string().optional(),
+  
+  // Usage tracking
+  usageLimit: z.number().min(1).optional(),
+  currentUsage: z.number().default(0),
+  
+  // Validity
+  validFrom: z.date().optional(),
+  validUntil: z.date().optional(),
+  isActive: z.boolean().default(true),
+  isSingleUse: z.boolean().default(false),
+  
+  // QR code
+  qrCodeUrl: z.string().url().optional(),
+  qrCodeData: z.string().optional(),
+  
+  // Batch tracking
+  generatedBatchId: z.string().uuid().optional(),
+  
+  // Audit
+  createdAt: z.date(),
+  updatedAt: z.date(),
+})
+
+export type PromotionCode = z.infer<typeof PromotionCodeSchema>
+
+export const PromotionUsageSchema = z.object({
+  id: z.string().uuid(),
+  promotionId: z.string().uuid(),
+  promotionCodeId: z.string().uuid().optional(),
+  orderId: z.string().uuid(),
+  userId: z.string().uuid().optional(),
+  
+  // Usage details
+  discountAmount: z.number().min(0),
+  originalOrderAmount: z.number().min(0),
+  finalOrderAmount: z.number().min(0),
+  
+  // Applied items (for item-specific promotions)
+  appliedItems: z.array(z.object({
+    itemId: z.string().uuid(),
+    quantity: z.number().min(1),
+    discountAmount: z.number().min(0),
+  })).default([]),
+  
+  // Context
+  customerSegment: CustomerSegment.optional(),
+  sessionId: z.string().optional(),
+  userAgent: z.string().optional(),
+  ipAddress: z.string().optional(),
+  
+  // Revenue impact
+  estimatedLostRevenue: z.number().optional(),
+  customerLifetimeValueImpact: z.number().optional(),
+  
+  // Audit
+  createdAt: z.date(),
+})
+
+export type PromotionUsage = z.infer<typeof PromotionUsageSchema>
+
+// Cart item with promotion context
+export const CartItemSchema = z.object({
+  menu_item_id: z.string().uuid(),
+  name: z.string(),
+  quantity: z.number().min(1),
+  unit_price: z.number().min(0),
+  category_id: z.string().uuid().optional(),
+  modifiers: z.array(z.object({
+    id: z.string(),
+    name: z.string(),
+    price: z.number(),
+  })).default([]),
+})
+
+export type CartItem = z.infer<typeof CartItemSchema>
+
+// Order pricing breakdown
+export interface OrderPricing {
+  subtotal: number
+  discountAmount: number
+  deliveryFee: number
+  deliveryDiscount: number
+  taxAmount: number
+  totalAmount: number
+}
+
+// Discount application details
+export interface DiscountApplication {
+  promotionId: string
+  promotionName: string
+  promotionType: string
+  discountScope: string
+  discountAmount: number
+  appliedToItems?: Array<{
+    itemId: string
+    itemName: string
+    quantity: number
+    discountAmount: number
+  }>
+  codeUsed?: string
+}
+
+// Promotion validation result
+export interface PromotionValidationResult {
+  isValid: boolean
+  promotionId: string
+  promotionCodeId: string
+  errorMessage: string
+  discountPreview: number
+}
+
+// Complete promotion calculation result
+export interface PromotionCalculationResult {
+  isValid: boolean
+  totalDiscount: number
+  discountBreakdown: DiscountApplication[]
+  finalPricing: OrderPricing
+  appliedPromotions: Array<{
+    promotionId: string
+    promotionName: string
+    discountAmount: number
+    promotionType: string
+    codeUsed?: string
+  }>
+  errors: string[]
+  warnings: string[]
+}
+
+// Promotion rules for advanced targeting
+export const PromotionRuleSchema = z.object({
+  id: z.string().uuid(),
+  promotionId: z.string().uuid(),
+  ruleType: z.string(), // 'category_include', 'category_exclude', 'item_include', etc.
+  ruleValue: z.any(), // Flexible rule data as JSON
+  isRequired: z.boolean().default(true),
+  rulePriority: z.number().default(0),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+})
+
+export type PromotionRule = z.infer<typeof PromotionRuleSchema>
+
+// Promotion analytics data
+export interface PromotionAnalytics {
+  promotionId: string
+  tenantId: string
+  date: string
+  hour?: number
+  
+  // Usage metrics
+  totalUses: number
+  uniqueCustomers: number
+  
+  // Financial metrics  
+  totalDiscountGiven: number
+  totalOrderValue: number
+  averageOrderValue: number
+  
+  // Customer metrics
+  newCustomers: number
+  returningCustomers: number
+  
+  // Conversion metrics
+  views: number
+  applications: number
+  conversionRate: number
+}
