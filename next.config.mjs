@@ -41,7 +41,6 @@ const nextConfig = {
   },
   
   // Performance optimizations
-  swcMinify: true,
   modularizeImports: {
     lodash: {
       transform: 'lodash/{{member}}',
@@ -60,8 +59,9 @@ const nextConfig = {
     gzipSize: true,
     craCompat: true,
     esmExternals: true,
-    appDir: true,
-    serverActions: true,
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
     typedRoutes: true,
   },
   
@@ -226,8 +226,6 @@ const nextConfig = {
   // Reduce bundle size
   generateEtags: true,
   
-  // Optimize fonts
-  optimizeFonts: true,
   
   // Generate static files
   generateBuildId: async () => {
