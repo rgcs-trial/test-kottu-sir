@@ -1,0 +1,118 @@
+{
+  "_meta": {
+    "locale": "it",
+    "source": "en",
+    "status": "needs_translation",
+    "generated": "2025-08-13T19:23:18.610Z"
+  },
+  "program": {
+    "title": "Loyalty Program",
+    "subtitle": "Earn points with every order and unlock exclusive rewards",
+    "joinNow": "Join Now",
+    "memberSince": "Member since",
+    "pointsBalance": "Points Balance",
+    "currentTier": "Current Tier",
+    "nextTier": "Next Tier",
+    "pointsToNextTier": "Points to next tier",
+    "tierProgress": "Tier Progress"
+  },
+  "tiers": {
+    "bronze": "Bronze",
+    "silver": "Silver",
+    "gold": "Gold",
+    "platinum": "Platinum",
+    "diamond": "Diamond",
+    "benefits": "Benefits",
+    "requirements": "Requirements",
+    "unlock": "Unlock at {points} points"
+  },
+  "points": {
+    "earn": "Earn Points",
+    "redeem": "Redeem Points",
+    "balance": "Available Points",
+    "earned": "Points Earned",
+    "redeemed": "Points Redeemed",
+    "expired": "Points Expired",
+    "expiring": "Points Expiring Soon",
+    "expiryDate": "Expires on",
+    "noExpiry": "No expiry",
+    "earnRate": "Earn {points} points per ${amount} spent",
+    "minimumSpend": "Minimum spend: ${amount}"
+  },
+  "rewards": {
+    "title": "Available Rewards",
+    "catalog": "Rewards Catalog",
+    "myRewards": "My Rewards",
+    "redeemed": "Redeemed Rewards",
+    "expired": "Expired Rewards",
+    "redeem": "Redeem ({points} points)",
+    "redeemNow": "Redeem Now",
+    "useReward": "Use Reward",
+    "rewardApplied": "Reward Applied",
+    "termsAndConditions": "Terms & Conditions",
+    "validUntil": "Valid until",
+    "minimumPurchase": "Minimum purchase required",
+    "maxUses": "Maximum uses per customer",
+    "categories": {
+      "discounts": "Discounts",
+      "freebies": "Free Items",
+      "experiences": "Experiences",
+      "merchandise": "Merchandise"
+    }
+  },
+  "history": {
+    "title": "Points History",
+    "transaction": "Transaction",
+    "date": "Date",
+    "points": "Points",
+    "description": "Description",
+    "order": "Order #{orderNumber}",
+    "bonus": "Bonus Points",
+    "referral": "Referral Bonus",
+    "birthday": "Birthday Bonus",
+    "signup": "Signup Bonus",
+    "review": "Review Bonus"
+  },
+  "referral": {
+    "title": "Refer Friends",
+    "subtitle": "Share the love and earn rewards",
+    "yourCode": "Your Referral Code",
+    "shareCode": "Share Your Code",
+    "howItWorks": "How It Works",
+    "step1": "Share your code with friends",
+    "step2": "They sign up and place their first order",
+    "step3": "You both earn bonus points!",
+    "friendGets": "Your friend gets",
+    "youGet": "You get",
+    "totalReferred": "Friends Referred",
+    "bonusEarned": "Bonus Points Earned",
+    "shareVia": "Share via"
+  },
+  "notifications": {
+    "pointsEarned": "You earned {points} points!",
+    "rewardRedeemed": "Reward redeemed successfully",
+    "tierUpgrade": "Congratulations! You've reached {tier} tier",
+    "pointsExpiring": "{points} points expiring in {days} days",
+    "birthdayBonus": "Happy birthday! Here's a special bonus",
+    "referralBonus": "You earned referral bonus points"
+  },
+  "settings": {
+    "title": "Loyalty Settings",
+    "emailPreferences": "Email Preferences",
+    "smsPreferences": "SMS Preferences",
+    "notifications": "Push Notifications",
+    "pointsUpdates": "Points & Rewards Updates",
+    "promotionalOffers": "Promotional Offers",
+    "birthdayReminders": "Birthday Reminders",
+    "referralUpdates": "Referral Updates"
+  },
+  "faq": {
+    "title": "Loyalty Program FAQ",
+    "howToEarn": "How do I earn points?",
+    "howToRedeem": "How do I redeem rewards?",
+    "pointsExpiry": "Do points expire?",
+    "tierBenefits": "What are the tier benefits?",
+    "accountIssues": "I'm having account issues",
+    "contactSupport": "Contact Support"
+  }
+}

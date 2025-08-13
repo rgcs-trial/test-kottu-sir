@@ -1,0 +1,156 @@
+{
+  "_meta": {
+    "locale": "pt",
+    "source": "en",
+    "status": "needs_translation",
+    "generated": "2025-08-13T19:23:18.612Z"
+  },
+  "reviews": {
+    "title": "Customer Reviews",
+    "writeReview": "Write a Review",
+    "editReview": "Edit Review",
+    "deleteReview": "Delete Review",
+    "reportReview": "Report Review",
+    "rating": "Rating",
+    "comment": "Review Comment",
+    "reviewBy": "Review by",
+    "verified": "Verified Purchase",
+    "helpful": "Helpful",
+    "notHelpful": "Not Helpful",
+    "reply": "Reply",
+    "showMore": "Show More",
+    "showLess": "Show Less",
+    "anonymous": "Anonymous",
+    "guestReview": "Guest Review"
+  },
+  "ratings": {
+    "overall": "Overall Rating",
+    "food": "Food Quality",
+    "service": "Service",
+    "ambiance": "Ambiance",
+    "value": "Value for Money",
+    "delivery": "Delivery",
+    "excellent": "Excellent",
+    "veryGood": "Very Good",
+    "good": "Good",
+    "fair": "Fair",
+    "poor": "Poor",
+    "stars": "{count, plural, =1 {# star} other {# stars}}",
+    "outOf5": "out of 5 stars"
+  },
+  "filters": {
+    "allReviews": "All Reviews",
+    "mostRecent": "Most Recent",
+    "mostHelpful": "Most Helpful",
+    "highestRated": "Highest Rated",
+    "lowestRated": "Lowest Rated",
+    "withPhotos": "With Photos",
+    "verifiedOnly": "Verified Only",
+    "filterByRating": "Filter by Rating",
+    "filterByDate": "Filter by Date",
+    "thisMonth": "This Month",
+    "last3Months": "Last 3 Months",
+    "last6Months": "Last 6 Months",
+    "thisYear": "This Year"
+  },
+  "form": {
+    "title": "Leave a Review",
+    "subtitle": "Share your experience with other customers",
+    "overallRating": "Overall Rating",
+    "selectRating": "Select your rating",
+    "reviewTitle": "Review Title",
+    "reviewComment": "Tell us about your experience",
+    "addPhotos": "Add Photos",
+    "wouldRecommend": "Would you recommend this restaurant?",
+    "orderAgain": "Would you order again?",
+    "deliveryExperience": "How was your delivery experience?",
+    "submitReview": "Submit Review",
+    "updateReview": "Update Review",
+    "saveDraft": "Save as Draft",
+    "guidelines": "Review Guidelines",
+    "termsAndConditions": "By submitting this review, you agree to our review guidelines",
+    "charactersRemaining": "{count} characters remaining",
+    "minimumLength": "Review must be at least {min} characters",
+    "maximumLength": "Review cannot exceed {max} characters"
+  },
+  "moderation": {
+    "title": "Review Moderation",
+    "pending": "Pending Reviews",
+    "approved": "Approved Reviews",
+    "rejected": "Rejected Reviews",
+    "reported": "Reported Reviews",
+    "actions": {
+      "approve": "Approve",
+      "reject": "Reject",
+      "flag": "Flag for Review",
+      "hide": "Hide Review",
+      "feature": "Feature Review",
+      "respond": "Respond to Review"
+    },
+    "reasons": {
+      "inappropriate": "Inappropriate Content",
+      "spam": "Spam",
+      "fake": "Fake Review",
+      "offensive": "Offensive Language",
+      "irrelevant": "Irrelevant Content",
+      "guidelines": "Violates Guidelines"
+    },
+    "response": {
+      "title": "Respond to Review",
+      "placeholder": "Thank you for your feedback...",
+      "publicResponse": "Public Response",
+      "privateMessage": "Private Message to Reviewer",
+      "respondAs": "Respond as",
+      "manager": "Manager",
+      "owner": "Owner",
+      "customerService": "Customer Service"
+    }
+  },
+  "analytics": {
+    "title": "Review Analytics",
+    "overview": "Reviews Overview",
+    "averageRating": "Average Rating",
+    "totalReviews": "Total Reviews",
+    "recentReviews": "Recent Reviews",
+    "ratingDistribution": "Rating Distribution",
+    "trendAnalysis": "Rating Trends",
+    "sentiment": "Sentiment Analysis",
+    "keywords": "Common Keywords",
+    "improvementAreas": "Areas for Improvement",
+    "topComplaints": "Top Complaints",
+    "topPraises": "Top Praises",
+    "responseRate": "Response Rate",
+    "responseTime": "Average Response Time"
+  },
+  "summary": {
+    "reviewsSummary": "Reviews Summary",
+    "basedOn": "Based on {count} reviews",
+    "recommendationRate": "{percentage}% would recommend",
+    "wouldOrderAgain": "{percentage}% would order again",
+    "topKeywords": "What customers say",
+    "recentActivity": "Recent Review Activity",
+    "ratingBreakdown": "Rating Breakdown",
+    "customerSentiment": "Customer Sentiment"
+  },
+  "notifications": {
+    "newReview": "New review received",
+    "reviewResponse": "Restaurant responded to your review",
+    "reviewHelpful": "Someone found your review helpful",
+    "reviewReported": "Review has been reported and is under investigation",
+    "reviewApproved": "Your review has been approved",
+    "reviewRejected": "Your review was not approved"
+  },
+  "errors": {
+    "reviewNotFound": "Review not found",
+    "cannotEdit": "You cannot edit this review",
+    "alreadyReviewed": "You have already reviewed this order",
+    "loginRequired": "Please log in to write a review",
+    "orderRequired": "You must have placed an order to review",
+    "serverError": "Failed to submit review. Please try again."
+  },
+  "placeholders": {
+    "reviewTitle": "Great food and excellent service!",
+    "reviewComment": "Tell other customers about your experience. What did you enjoy? What could be improved?",
+    "responseComment": "Thank you for taking the time to share your feedback..."
+  }
+}

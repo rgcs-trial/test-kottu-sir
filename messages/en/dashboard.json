@@ -1,0 +1,185 @@
+{
+  "navigation": {
+    "overview": "Overview",
+    "analytics": "Analytics",
+    "orders": "Orders",
+    "menu": "Menu Management",
+    "inventory": "Inventory",
+    "kitchen": "Kitchen Display",
+    "staff": "Staff",
+    "customers": "Customers",
+    "reviews": "Reviews",
+    "marketing": "Marketing",
+    "promotions": "Promotions",
+    "loyalty": "Loyalty Program",
+    "reservations": "Reservations",
+    "reports": "Reports",
+    "settings": "Settings"
+  },
+  "overview": {
+    "title": "Dashboard Overview",
+    "welcome": "Welcome back, {name}!",
+    "todayStats": "Today's Statistics",
+    "revenue": "Revenue",
+    "orders": "Orders",
+    "customers": "Customers",
+    "avgOrderValue": "Average Order Value",
+    "recentOrders": "Recent Orders",
+    "topItems": "Top Selling Items",
+    "lowInventory": "Low Inventory Items",
+    "pendingReviews": "Pending Reviews",
+    "activePromotions": "Active Promotions",
+    "upcomingReservations": "Upcoming Reservations"
+  },
+  "analytics": {
+    "title": "Analytics & Reports",
+    "revenue": {
+      "title": "Revenue Analytics",
+      "total": "Total Revenue",
+      "growth": "Revenue Growth",
+      "comparison": "vs Previous Period",
+      "breakdown": "Revenue Breakdown",
+      "trends": "Revenue Trends",
+      "forecast": "Revenue Forecast"
+    },
+    "orders": {
+      "title": "Order Analytics",
+      "totalOrders": "Total Orders",
+      "completedOrders": "Completed Orders",
+      "cancelledOrders": "Cancelled Orders",
+      "avgOrderValue": "Average Order Value",
+      "orderTrends": "Order Trends",
+      "peakHours": "Peak Hours",
+      "orderTypes": "Order Types"
+    },
+    "customers": {
+      "title": "Customer Analytics",
+      "totalCustomers": "Total Customers",
+      "newCustomers": "New Customers",
+      "returningCustomers": "Returning Customers",
+      "customerRetention": "Customer Retention",
+      "loyaltyMembers": "Loyalty Members",
+      "customerLifetimeValue": "Customer Lifetime Value"
+    },
+    "menu": {
+      "title": "Menu Performance",
+      "topItems": "Top Performing Items",
+      "underperforming": "Underperforming Items",
+      "profitability": "Item Profitability",
+      "popularity": "Item Popularity",
+      "categoryPerformance": "Category Performance",
+      "seasonalTrends": "Seasonal Trends"
+    },
+    "timeframes": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "last7Days": "Last 7 Days",
+      "last30Days": "Last 30 Days",
+      "thisMonth": "This Month",
+      "lastMonth": "Last Month",
+      "thisQuarter": "This Quarter",
+      "thisYear": "This Year",
+      "custom": "Custom Range"
+    }
+  },
+  "orders": {
+    "title": "Order Management",
+    "filters": {
+      "all": "All Orders",
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "preparing": "Preparing",
+      "ready": "Ready",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "updateStatus": "Update Status",
+      "printReceipt": "Print Receipt",
+      "contactCustomer": "Contact Customer",
+      "refundOrder": "Process Refund"
+    },
+    "bulkActions": {
+      "markAsConfirmed": "Mark as Confirmed",
+      "markAsPreparing": "Mark as Preparing",
+      "markAsReady": "Mark as Ready",
+      "printSelected": "Print Selected",
+      "exportSelected": "Export Selected"
+    }
+  },
+  "menu": {
+    "title": "Menu Management",
+    "categories": "Categories",
+    "items": "Menu Items",
+    "addCategory": "Add Category",
+    "addItem": "Add Menu Item",
+    "editItem": "Edit Menu Item",
+    "deleteItem": "Delete Menu Item",
+    "availability": "Availability",
+    "pricing": "Pricing",
+    "modifiers": "Modifiers",
+    "nutritional": "Nutritional Info",
+    "images": "Images",
+    "bulkActions": {
+      "updatePrices": "Update Prices",
+      "toggleAvailability": "Toggle Availability",
+      "bulkEdit": "Bulk Edit",
+      "exportMenu": "Export Menu",
+      "importMenu": "Import Menu"
+    }
+  },
+  "inventory": {
+    "title": "Inventory Management",
+    "stock": "Stock Levels",
+    "lowStock": "Low Stock Items",
+    "outOfStock": "Out of Stock",
+    "suppliers": "Suppliers",
+    "orders": "Purchase Orders",
+    "receiving": "Receiving",
+    "adjustments": "Stock Adjustments",
+    "reports": "Inventory Reports",
+    "alerts": "Stock Alerts",
+    "reorderPoints": "Reorder Points",
+    "costTracking": "Cost Tracking"
+  },
+  "kitchen": {
+    "title": "Kitchen Display",
+    "newOrders": "New Orders",
+    "inProgress": "In Progress",
+    "ready": "Ready for Pickup/Delivery",
+    "orderQueue": "Order Queue",
+    "preparationTime": "Prep Time",
+    "specialInstructions": "Special Instructions",
+    "markAsReady": "Mark as Ready",
+    "delayOrder": "Delay Order",
+    "needHelp": "Need Help"
+  },
+  "staff": {
+    "title": "Staff Management",
+    "employees": "Employees",
+    "schedules": "Schedules",
+    "roles": "Roles & Permissions",
+    "timeTracking": "Time Tracking",
+    "performance": "Performance",
+    "payroll": "Payroll",
+    "addEmployee": "Add Employee",
+    "clockIn": "Clock In",
+    "clockOut": "Clock Out",
+    "breaks": "Breaks",
+    "overtime": "Overtime"
+  },
+  "settings": {
+    "title": "Settings",
+    "restaurant": "Restaurant Profile",
+    "hours": "Operating Hours",
+    "contact": "Contact Information",
+    "delivery": "Delivery Settings",
+    "payment": "Payment Methods",
+    "taxes": "Tax Settings",
+    "notifications": "Notifications",
+    "integrations": "Integrations",
+    "security": "Security",
+    "backups": "Backups"
+  }
+}

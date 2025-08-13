@@ -11,6 +11,9 @@ const nextConfig = {
   // Moved from experimental as per Next.js 15 requirements
   serverExternalPackages: ['@node-rs/argon2', '@node-rs/bcrypt'],
   
+  // Internationalization configuration
+  // Note: next-intl handles routing in middleware, so we don't use Next.js i18n config
+  
   // Output file tracing for Cloudflare Pages compatibility
   outputFileTracingIncludes: {
     '/api/**/*': ['./node_modules/**/*.wasm', './node_modules/**/*.node'],
@@ -72,6 +75,12 @@ const nextConfig = {
       ...config.experiments,
       asyncWebAssembly: true,
     }
+    
+    // Support for importing JSON files (for translations)
+    config.module.rules.push({
+      test: /\.json$/,
+      type: 'json'
+    })
     
     // Bundle analyzer in development
     if (!dev && !isServer && process.env.ANALYZE === 'true' && BundleAnalyzerPlugin) {

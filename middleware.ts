@@ -3,6 +3,8 @@ import type { NextRequest } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { createMiddlewareSupabaseClient } from '@/lib/auth/index'
 import type { TenantInfo, MiddlewareContext } from '@/types'
+import createMiddleware from 'next-intl/middleware'
+import { locales, defaultLocale } from './i18n'
 
 /**
  * Middleware for handling multi-tenant routing based on subdomains
@@ -34,6 +36,13 @@ const PLATFORM_ROUTES = [
   '/robots.txt',
   '/sitemap.xml'
 ]
+
+// Create i18n middleware instance
+const intlMiddleware = createMiddleware({
+  locales,
+  defaultLocale,
+  localePrefix: 'as-needed' // Only add locale prefix when not default
+})
 
 // Routes that require authentication
 const PROTECTED_ROUTES = [
@@ -273,6 +282,38 @@ async function handlePlatformRouting(
 }
 
 /**
+ * Extract locale from pathname
+ */
+function getLocaleFromPathname(pathname: string): string | null {
+  const segments = pathname.split('/')
+  const potentialLocale = segments[1]
+  
+  if (locales.includes(potentialLocale as any)) {
+    return potentialLocale
+  }
+  
+  return null
+}
+
+/**
+ * Check if pathname has locale prefix
+ */
+function hasLocalePrefix(pathname: string): boolean {
+  return getLocaleFromPathname(pathname) !== null
+}
+
+/**
+ * Remove locale from pathname
+ */
+function removeLocaleFromPathname(pathname: string): string {
+  const locale = getLocaleFromPathname(pathname)
+  if (locale) {
+    return pathname.replace(`/${locale}`, '') || '/'
+  }
+  return pathname
+}
+
+/**
  * Main middleware function
  */
 export async function middleware(request: NextRequest) {
@@ -287,6 +328,25 @@ export async function middleware(request: NextRequest) {
     pathname.includes('.') // Skip files with extensions
   ) {
     return NextResponse.next()
+  }
+
+  // Handle internationalization for non-API routes
+  if (!pathname.startsWith('/api')) {
+    // Check if pathname has locale prefix
+    const currentLocale = getLocaleFromPathname(pathname)
+    const pathnameWithoutLocale = removeLocaleFromPathname(pathname)
+    
+    // Apply i18n middleware for platform routes or when no valid tenant
+    const subdomain = getSubdomain(hostname)
+    const shouldApplyI18n = isPlatformRoute(pathnameWithoutLocale) || !subdomain
+    
+    if (shouldApplyI18n) {
+      // Apply i18n middleware
+      const intlResponse = intlMiddleware(request)
+      if (intlResponse) {
+        return intlResponse
+      }
+    }
   }
   
   // Handle API routes separately (no tenant resolution needed for most)
@@ -310,8 +370,12 @@ export async function middleware(request: NextRequest) {
     return response
   }
   
-  // Check if this is a platform route
-  if (isPlatformRoute(pathname)) {
+  // Use pathname without locale for routing decisions
+  const currentLocale = getLocaleFromPathname(pathname)
+  const pathnameWithoutLocale = removeLocaleFromPathname(pathname)
+  
+  // Check if this is a platform route (using pathname without locale)
+  if (isPlatformRoute(pathnameWithoutLocale)) {
     const context = createMiddlewareContext(request, null)
     return handlePlatformRouting(request, context)
   }
@@ -324,8 +388,15 @@ export async function middleware(request: NextRequest) {
     tenant = await resolveTenant(subdomain)
   }
   
-  // Create middleware context
+  // Create middleware context (using original pathname for context)
   const context = createMiddlewareContext(request, tenant)
+  
+  // Add locale information to context if available
+  if (currentLocale) {
+    // Add locale to request headers for server components
+    const requestHeaders = new Headers(request.headers)
+    requestHeaders.set('x-locale', currentLocale)
+  }
   
   // Route based on whether we have a valid tenant
   if (tenant && tenant.isValidTenant) {

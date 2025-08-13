@@ -1,0 +1,160 @@
+{
+  "_meta": {
+    "locale": "pt",
+    "source": "en",
+    "status": "needs_translation",
+    "generated": "2025-08-13T19:23:18.612Z"
+  },
+  "booking": {
+    "title": "Make a Reservation",
+    "subtitle": "Book your table for an unforgettable dining experience",
+    "selectDate": "Select Date",
+    "selectTime": "Select Time",
+    "selectPartySize": "Party Size",
+    "guestCount": "{count, plural, =1 {# guest} other {# guests}}",
+    "availableTimes": "Available Times",
+    "noAvailability": "No availability for this date/time",
+    "alternativeTimes": "Alternative times",
+    "tablePreference": "Table Preference",
+    "specialRequests": "Special Requests",
+    "occasion": "Special Occasion",
+    "contactInfo": "Contact Information",
+    "confirmReservation": "Confirm Reservation",
+    "bookingFee": "Booking Fee",
+    "cancellationPolicy": "Cancellation Policy",
+    "termsAndConditions": "Terms & Conditions"
+  },
+  "tablePreferences": {
+    "noPreference": "No Preference",
+    "window": "Window Table",
+    "quiet": "Quiet Area",
+    "bar": "Bar Seating",
+    "outdoor": "Outdoor Seating",
+    "privateRoom": "Private Room",
+    "highChair": "High Chair Needed",
+    "wheelchair": "Wheelchair Accessible"
+  },
+  "occasions": {
+    "none": "Regular Dining",
+    "birthday": "Birthday",
+    "anniversary": "Anniversary",
+    "dateNight": "Date Night",
+    "business": "Business Meeting",
+    "celebration": "Celebration",
+    "graduation": "Graduation",
+    "engagement": "Engagement",
+    "other": "Other"
+  },
+  "timeSlots": {
+    "breakfast": "Breakfast",
+    "brunch": "Brunch",
+    "lunch": "Lunch",
+    "earlyDinner": "Early Dinner",
+    "dinner": "Dinner",
+    "lateDinner": "Late Dinner",
+    "available": "Available",
+    "limited": "Limited Availability",
+    "fullyBooked": "Fully Booked",
+    "closed": "Closed"
+  },
+  "confirmation": {
+    "title": "Reservation Confirmed",
+    "thankYou": "Thank you for your reservation!",
+    "confirmationNumber": "Confirmation Number",
+    "reservationDetails": "Reservation Details",
+    "date": "Date",
+    "time": "Time",
+    "partySize": "Party Size",
+    "table": "Table",
+    "specialRequests": "Special Requests",
+    "confirmationSent": "Confirmation sent to your email",
+    "addToCalendar": "Add to Calendar",
+    "viewReservation": "View Reservation",
+    "modifyReservation": "Modify Reservation",
+    "cancelReservation": "Cancel Reservation"
+  },
+  "management": {
+    "title": "Reservation Management",
+    "upcoming": "Upcoming Reservations",
+    "past": "Past Reservations",
+    "cancelled": "Cancelled Reservations",
+    "noShow": "No-Show Reservations",
+    "filters": {
+      "all": "All Reservations",
+      "today": "Today",
+      "thisWeek": "This Week",
+      "thisMonth": "This Month",
+      "confirmed": "Confirmed",
+      "pending": "Pending",
+      "seated": "Seated",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "noShow": "No Show"
+    },
+    "actions": {
+      "confirm": "Confirm",
+      "seat": "Seat Guests",
+      "complete": "Mark Complete",
+      "cancel": "Cancel",
+      "markNoShow": "Mark No-Show",
+      "sendReminder": "Send Reminder",
+      "contactGuest": "Contact Guest",
+      "viewDetails": "View Details"
+    }
+  },
+  "tableLayout": {
+    "title": "Table Layout",
+    "tables": "Tables",
+    "capacity": "Capacity",
+    "status": "Status",
+    "available": "Available",
+    "occupied": "Occupied",
+    "reserved": "Reserved",
+    "cleaning": "Cleaning",
+    "outOfOrder": "Out of Order",
+    "addTable": "Add Table",
+    "editTable": "Edit Table",
+    "deleteTable": "Delete Table"
+  },
+  "waitlist": {
+    "title": "Waitlist",
+    "joinWaitlist": "Join Waitlist",
+    "waitlistPosition": "Waitlist Position",
+    "estimatedWait": "Estimated Wait Time",
+    "notifyWhenReady": "We'll notify you when your table is ready",
+    "currentWait": "Current wait time",
+    "leaveWaitlist": "Leave Waitlist",
+    "waitlistFull": "Waitlist is currently full",
+    "notifications": {
+      "tableReady": "Your table is ready!",
+      "positionUpdate": "You're now #{position} on the waitlist"
+    }
+  },
+  "settings": {
+    "title": "Reservation Settings",
+    "operatingHours": "Operating Hours",
+    "capacity": "Seating Capacity",
+    "timeSlots": "Time Slots",
+    "duration": "Reservation Duration",
+    "advanceBooking": "Advance Booking",
+    "cancellationPolicy": "Cancellation Policy",
+    "noShowPolicy": "No-Show Policy",
+    "bookingFees": "Booking Fees",
+    "specialRequests": "Special Requests",
+    "notifications": "Notification Settings",
+    "autoConfirm": "Auto-confirm reservations",
+    "requireDeposit": "Require deposit",
+    "allowModifications": "Allow guest modifications"
+  },
+  "errors": {
+    "reservationNotFound": "Reservation not found",
+    "invalidDate": "Invalid date selected",
+    "pastDate": "Cannot book for past dates",
+    "noAvailability": "No tables available for selected time",
+    "partyTooLarge": "Party size exceeds table capacity",
+    "closedForDay": "Restaurant closed on selected date",
+    "bookingTooFar": "Cannot book more than {days} days in advance",
+    "cancellationTooLate": "Cannot cancel within {hours} hours of reservation",
+    "serverError": "Server error. Please try again."
+  }
+}

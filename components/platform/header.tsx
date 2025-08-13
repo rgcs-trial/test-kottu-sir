@@ -2,20 +2,23 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Menu, X } from 'lucide-react'
+import { LanguageSwitcher } from '@/components/i18n/language-switcher'
 
 /**
  * Platform header for marketing pages and authentication
  */
 export function Header() {
+  const t = useTranslations('common')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navigation = [
-    { name: 'Features', href: '/features' },
-    { name: 'Pricing', href: '/pricing' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+    { name: t('navigation.features') || 'Features', href: '/features' },
+    { name: t('navigation.pricing') || 'Pricing', href: '/pricing' },
+    { name: t('navigation.about') || 'About', href: '/about' },
+    { name: t('navigation.contact') || 'Contact', href: '/contact' },
   ]
 
   return (
@@ -35,7 +38,7 @@ export function Header() {
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
             onClick={() => setIsMenuOpen(true)}
           >
-            <span className="sr-only">Open main menu</span>
+            <span className="sr-only">{t('buttons.openMenu') || 'Open main menu'}</span>
             <Menu className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
@@ -54,12 +57,13 @@ export function Header() {
         </div>
 
         {/* Auth buttons */}
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6 lg:items-center">
+          <LanguageSwitcher variant="header" />
           <Button variant="ghost" asChild>
-            <Link href="/login">Log in</Link>
+            <Link href="/login">{t('navigation.login')}</Link>
           </Button>
           <Button asChild>
-            <Link href="/signup">Start Free Trial</Link>
+            <Link href="/signup">{t('buttons.getStarted') || 'Start Free Trial'}</Link>
           </Button>
         </div>
       </nav>
@@ -77,7 +81,7 @@ export function Header() {
                 className="-m-2.5 rounded-md p-2.5 text-gray-700"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <span className="sr-only">Close menu</span>
+                <span className="sr-only">{t('buttons.close')}</span>
                 <X className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
@@ -96,11 +100,14 @@ export function Header() {
                   ))}
                 </div>
                 <div className="py-6 space-y-4">
+                  <div className="flex justify-center pb-4">
+                    <LanguageSwitcher variant="header" />
+                  </div>
                   <Button variant="ghost" className="w-full" asChild>
-                    <Link href="/login">Log in</Link>
+                    <Link href="/login">{t('navigation.login')}</Link>
                   </Button>
                   <Button className="w-full" asChild>
-                    <Link href="/signup">Start Free Trial</Link>
+                    <Link href="/signup">{t('buttons.getStarted') || 'Start Free Trial'}</Link>
                   </Button>
                 </div>
               </div>
