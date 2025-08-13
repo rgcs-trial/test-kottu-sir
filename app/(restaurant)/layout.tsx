@@ -30,8 +30,8 @@ export default async function RestaurantLayout({
   children, 
   params 
 }: RestaurantLayoutProps) {
-  const supabase = createClient()
-  const headersList = headers()
+  const supabase = await createClient()
+  const headersList = await headers()
   
   // Get tenant information from middleware headers
   const tenantId = headersList.get('x-tenant-id')

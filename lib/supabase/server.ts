@@ -18,8 +18,8 @@ if (!supabaseUrl || !supabaseAnonKey) {
  * Create a Supabase client for server components
  * Automatically handles authentication state via cookies
  */
-export const createClient = () => {
-  const cookieStore = cookies()
+export const createClient = async () => {
+  const cookieStore = await cookies()
 
   return createServerClient<Database>(
     supabaseUrl,
