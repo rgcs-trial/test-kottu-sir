@@ -35,6 +35,16 @@ export interface Database {
           currency: string
           tax_rate: number
           
+          // Operating Settings
+          is_online: boolean
+          is_accepting_orders: boolean
+          temporary_closure_reason: string | null
+          
+          // Service Options
+          accepts_delivery: boolean
+          accepts_takeout: boolean
+          accepts_dine_in: boolean
+          
           // Subscription
           subscription_tier: 'basic' | 'premium' | 'enterprise'
           subscription_status: 'active' | 'past_due' | 'canceled' | 'incomplete'
@@ -72,6 +82,14 @@ export interface Database {
           currency?: string
           tax_rate?: number
           
+          is_online?: boolean
+          is_accepting_orders?: boolean
+          temporary_closure_reason?: string | null
+          
+          accepts_delivery?: boolean
+          accepts_takeout?: boolean
+          accepts_dine_in?: boolean
+          
           subscription_tier?: 'basic' | 'premium' | 'enterprise'
           subscription_status?: 'active' | 'past_due' | 'canceled' | 'incomplete'
           subscription_ends_at?: string | null
@@ -106,6 +124,14 @@ export interface Database {
           timezone?: string
           currency?: string
           tax_rate?: number
+          
+          is_online?: boolean
+          is_accepting_orders?: boolean
+          temporary_closure_reason?: string | null
+          
+          accepts_delivery?: boolean
+          accepts_takeout?: boolean
+          accepts_dine_in?: boolean
           
           subscription_tier?: 'basic' | 'premium' | 'enterprise'
           subscription_status?: 'active' | 'past_due' | 'canceled' | 'incomplete'
@@ -633,6 +659,78 @@ export interface Database {
           menu_item_id?: string
           schedule_id?: string
           created_at?: string
+        }
+      }
+
+      operating_hours: {
+        Row: {
+          id: string
+          restaurant_id: string
+          day_of_week: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'
+          is_open: boolean
+          open_time: string | null
+          close_time: string | null
+          is_overnight: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          restaurant_id: string
+          day_of_week: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'
+          is_open?: boolean
+          open_time?: string | null
+          close_time?: string | null
+          is_overnight?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          restaurant_id?: string
+          day_of_week?: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'
+          is_open?: boolean
+          open_time?: string | null
+          close_time?: string | null
+          is_overnight?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+      }
+
+      onboarding_status: {
+        Row: {
+          id: string
+          user_id: string
+          restaurant_id: string | null
+          is_complete: boolean
+          current_step: 'restaurant' | 'menu' | 'payment' | 'complete'
+          steps: any // JSON object
+          started_at: string
+          completed_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          restaurant_id?: string | null
+          is_complete?: boolean
+          current_step?: 'restaurant' | 'menu' | 'payment' | 'complete'
+          steps: any
+          started_at: string
+          completed_at?: string | null
+          updated_at: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          restaurant_id?: string | null
+          is_complete?: boolean
+          current_step?: 'restaurant' | 'menu' | 'payment' | 'complete'
+          steps?: any
+          started_at?: string
+          completed_at?: string | null
+          updated_at?: string
         }
       }
     }
