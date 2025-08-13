@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
+// import type { Metadata } from 'next'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, CheckCircle, Star, Users, Zap } from 'lucide-react'
 import Link from 'next/link'
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Complete Restaurant Management Platform',
   description: 'Streamline your restaurant operations with our all-in-one platform. Online ordering, menu management, analytics, and more.',
 }
