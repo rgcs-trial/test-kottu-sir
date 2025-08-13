@@ -551,3 +551,226 @@ export interface PlatformAnalytics {
     }>
   }
 }
+
+// =============================================
+// RESERVATION ANALYTICS
+// =============================================
+
+export interface ReservationMetrics {
+  date: string
+  totalReservations: number
+  confirmedReservations: number
+  cancelledReservations: number
+  noShowReservations: number
+  walkInCount: number
+  totalGuests: number
+  averagePartySize: number
+  averageDuration: number
+  turnoverRate: number
+  utilizationRate: number
+}
+
+export interface TablePerformance {
+  tableId: string
+  tableNumber: string
+  tableName: string
+  capacity: number
+  tableType: string
+  totalReservations: number
+  utilization: number
+  averageDuration: number
+  revenue: number
+  revenuePerSeat: number
+  turnovers: number
+  rating: number
+  preferenceScore: number
+}
+
+export interface TimeSlotAnalytics {
+  timeSlot: string
+  dayOfWeek: number
+  totalReservations: number
+  capacity: number
+  utilization: number
+  averagePartySize: number
+  revenue: number
+  waitlistLength: number
+  noShowRate: number
+  cancellationRate: number
+  demandScore: number
+}
+
+export interface WaitlistMetrics {
+  date: string
+  totalWaitlisted: number
+  averageWaitTime: number
+  conversionRate: number
+  abandonmentRate: number
+  peakWaitlistHours: Array<{
+    hour: number
+    count: number
+  }>
+  partySize: Array<{
+    size: number
+    count: number
+    conversionRate: number
+  }>
+}
+
+export interface ReservationAnalytics extends BaseAnalytics {
+  overview: {
+    totalReservations: number
+    confirmedReservations: number
+    noShowRate: number
+    cancellationRate: number
+    averagePartySize: number
+    totalRevenue: number
+    revenuePerReservation: number
+    tableUtilization: number
+  }
+  trends: {
+    reservations: TrendData
+    noShows: TrendData
+    utilization: TrendData
+    revenue: TrendData
+  }
+  dailyMetrics: ReservationMetrics[]
+  tablePerformance: TablePerformance[]
+  timeSlotAnalysis: TimeSlotAnalytics[]
+  waitlistAnalytics: WaitlistMetrics[]
+  customerInsights: {
+    repeatCustomers: number
+    newCustomers: number
+    loyaltyRate: number
+    preferredTimeSlots: Array<{
+      timeSlot: string
+      count: number
+      percentage: number
+    }>
+    averageAdvanceBooking: number
+    specialOccasions: Array<{
+      occasion: string
+      count: number
+      percentage: number
+      averageSpend: number
+    }>
+  }
+  operationalMetrics: {
+    seatingEfficiency: number
+    turnoverRate: number
+    averageServiceTime: number
+    peakHours: Array<{
+      hour: number
+      utilization: number
+      revenue: number
+    }>
+    staffingNeeds: Array<{
+      timeSlot: string
+      recommendedStaff: number
+      currentStaff: number
+      efficiency: number
+    }>
+  }
+  forecasting: {
+    predictedReservations: Array<{
+      date: string
+      predicted: number
+      confidence: number
+    }>
+    capacityRecommendations: Array<{
+      timeSlot: string
+      recommendedCapacity: number
+      currentCapacity: number
+    }>
+    revenueProjection: Array<{
+      date: string
+      projectedRevenue: number
+      confidence: number
+    }>
+  }
+  optimization: Array<{
+    category: 'table_layout' | 'time_slots' | 'pricing' | 'staffing'
+    priority: 'high' | 'medium' | 'low'
+    suggestion: string
+    potentialImpact: string
+    confidence: number
+    implementation: string
+  }>
+}
+
+export interface ReservationDashboard {
+  liveStats: {
+    currentReservations: number
+    upcomingToday: number
+    waitlistCount: number
+    availableTables: number
+    utilizationRate: number
+    todayRevenue: number
+  }
+  alerts: Array<{
+    id: string
+    type: 'no_show' | 'late_arrival' | 'overbook' | 'waitlist_full' | 'table_ready'
+    priority: 'high' | 'medium' | 'low'
+    message: string
+    timestamp: string
+    tableId?: string
+    reservationId?: string
+    action?: string
+  }>
+  upcomingReservations: Array<{
+    id: string
+    customerName: string
+    partySize: number
+    time: string
+    tableNumber: string
+    status: string
+    specialRequests?: string
+    customerPhone?: string
+  }>
+  tableStatus: Array<{
+    tableId: string
+    tableNumber: string
+    status: 'available' | 'occupied' | 'reserved' | 'maintenance'
+    currentReservation?: {
+      customerName: string
+      partySize: number
+      startTime: string
+      estimatedEnd: string
+    }
+    nextReservation?: {
+      customerName: string
+      partySize: number
+      time: string
+    }
+  }>
+  waitlistStatus: Array<{
+    id: string
+    customerName: string
+    partySize: number
+    waitTime: number
+    priority: number
+    estimatedSeating: string
+    customerPhone?: string
+  }>
+}
+
+// Integration with existing analytics
+export interface ExtendedAnalyticsDashboard extends AnalyticsDashboard {
+  reservations: ReservationAnalytics
+  reservationDashboard: ReservationDashboard
+}
+
+export interface ExtendedAnalyticsRequest extends AnalyticsRequest {
+  includeReservations?: boolean
+  reservationFilters?: {
+    tableTypes?: string[]
+    timeSlots?: string[]
+    statuses?: string[]
+    occasions?: string[]
+  }
+}
+
+export interface ReservationExportOptions extends ExportOptions {
+  includeReservations: boolean
+  reservationSections?: Array<'overview' | 'tables' | 'timeslots' | 'waitlist' | 'customers'>
+}

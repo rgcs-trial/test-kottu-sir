@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import type { Restaurant } from '@/types'
 import {
   BarChart3,
+  Crown,
   Home,
   Menu as MenuIcon,
   Settings,
@@ -17,6 +18,7 @@ const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Orders', href: '/dashboard/orders', icon: ShoppingBag },
   { name: 'Menu', href: '/dashboard/menu', icon: MenuIcon },
+  { name: 'Loyalty Program', href: '/dashboard/loyalty', icon: Crown },
   { name: 'Analytics', href: '/dashboard/analytics', icon: BarChart3 },
   { name: 'Staff', href: '/dashboard/staff', icon: Users },
   { name: 'Settings', href: '/dashboard/settings', icon: Settings },

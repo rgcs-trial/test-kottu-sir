@@ -18,6 +18,7 @@ export function RestaurantHeader({ restaurant }: RestaurantHeaderProps) {
 
   const navigation = [
     { name: 'Menu', href: '/menu' },
+    { name: 'Loyalty', href: '/loyalty' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ]
