@@ -128,7 +128,7 @@
     "typescript": "^5.9.2",
     "vercel": "latest",
     "webpack-bundle-analyzer": "^4.9.1",
-    "wrangler": "^3.22.1"
+    "wrangler": "^3.114.17"
   },
   "engines": {
     "node": ">=18.17.0"
